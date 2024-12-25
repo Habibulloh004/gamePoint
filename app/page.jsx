@@ -1,15 +1,14 @@
-"use client"
+"use client";
 import { useRouter } from "next/navigation";
-import React, { useState, useEffect } from "react";
-
+import React, { useState } from "react";
 
 const ICAFE_MEMBERS_API =
   "https://api.icafecloud.com/api/v2/cafe/78949/members/action/suggestMembers";
 const ICAFE_AUTH_TOKEN =
   "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNjlhZTIyNDNjZjRiYTlmMmRlYzAxYWQ4MjNjNTBjYWE2NGNiZWU5NjkzMGQ5ZmEyZTY0MWM2MDZmOTdkZjE5NDY5YWFkMGJmNTVkZGFmNjciLCJpYXQiOjE3MzQ0MjI4NzUuOTYwMDg1LCJuYmYiOjE3MzQ0MjI4NzUuOTYwMDg3LCJleHAiOjE3NjU5NTg4NzUuOTU4MDc5LCJzdWIiOiIzODQxMTkwMTI4Nzg5NDkiLCJzY29wZXMiOltdfQ.JTuAqQibEtsSGZcbk5adaA-SeY2sOlMy69A7bEcrA-McUg2a5zdxJZTwIPTm9pzaPQIzsiXZMffgXYUA5Zf23RYJTqGErb6vkWeaYXMQLdn6tzownZhzKD-SpCbsoHK5BGYpqpDLMnPevxgJ43bOBKYkIzuraxsip1qcuSdvjtcrfK4avU02XP2KQq7qMLWasZ5QM12rgghQIX0fahwwK7FOtzeylgzqCGC38mnxuaj6-p3G_V5A_enoPgUDtJm58-0xCVg9aI3i-Cer5S9D6pfnMVXYeuss6BJm2clg1QAvJx9Z5nHJX2zrOJUq5W017bwWYY2NRRSu1OT0HBN3me63FRRdT9TJOMeR1Wcm0ppCZihDWkLmuQ00nnq09LijRIKg5US68Tyg8Hni58oyKbjf90X1FHIzYzxA7vkmXc3h_2q7PAAD7_OQlVyBiaXMg8pS3N-uxIuoLUMbQlx9MYxeQk1A0iTggzHGlTD2TohWE0yW2LNjdTUah9J9Oi7ifY_BO7jrKQlxpJTq_KMJ6NApcukECZTO-Oe9i__54qYgWIMlCkl39ibtfJe3R9_8zX9uhgK3vLgDYgP5Z_Y_wuz0uj3FgE7lI55tGB4UVJuyW8S0R0Dx77UV_ue5Gr-RkXcGB5-eV7okJqX5TujUp5Jur-vN5-JWrJanga-jwIE";
 
-const Page = () => {
-  const router = useRouter()
+export default function HomePage() {
+  const router = useRouter();
   const [userID, setUserID] = useState("");
   const [amount, setAmount] = useState("");
   const [error, setError] = useState(false);
@@ -103,7 +102,9 @@ const Page = () => {
         setTransactionId(transactionId);
         console.log("Payment Response:", data);
 
-        router.push(`/qr?userId=${userID}&transactionId=${transactionId}&amount=${amount}`);
+        router.push(
+          `/qr?userId=${userID}&transactionId=${transactionId}&amount=${amount}`
+        );
       } else {
         console.error("Failed to get transaction ID from response:", data);
       }
@@ -133,39 +134,41 @@ const Page = () => {
 
     setMemberError("");
 
-    router.push(`/clickqr?&amount=${amount}&memberId=${memberExists.member_id}`);
+    router.push(
+      `/clickqr?&amount=${amount}&memberId=${memberExists.member_id}`
+    );
   };
 
   return (
     <div
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh',
-        backgroundColor: '#000',
-        fontFamily: 'Arial, sans-serif',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+        backgroundColor: "#000",
+        fontFamily: "Arial, sans-serif",
       }}
     >
       <img
         src="./cyberclub.svg"
         alt="Game Point Logo"
         style={{
-          width: '150px',
-          marginBottom: '20px',
+          width: "150px",
+          marginBottom: "20px",
         }}
       />
 
       <input
         type="text"
         style={{
-          width: '300px',
-          padding: '10px',
-          marginBottom: '10px',
-          borderRadius: '5px',
-          border: '1px solid #ccc',
-          fontSize: '16px',
+          width: "300px",
+          padding: "10px",
+          marginBottom: "10px",
+          borderRadius: "5px",
+          border: "1px solid #ccc",
+          fontSize: "16px",
         }}
         placeholder="Напишите свой ID"
         value={userID}
@@ -175,12 +178,12 @@ const Page = () => {
       <input
         type="number"
         style={{
-          width: '300px',
-          padding: '10px',
-          marginBottom: '10px',
-          borderRadius: '5px',
-          border: '1px solid #ccc',
-          fontSize: '16px',
+          width: "300px",
+          padding: "10px",
+          marginBottom: "10px",
+          borderRadius: "5px",
+          border: "1px solid #ccc",
+          fontSize: "16px",
         }}
         placeholder="Введите сумму (не меньше 1000)"
         value={amount}
@@ -189,27 +192,27 @@ const Page = () => {
       />
 
       {amountError && (
-        <p style={{ color: 'red', marginBottom: '10px' }}>{amountError}</p>
+        <p style={{ color: "red", marginBottom: "10px" }}>{amountError}</p>
       )}
       {memberError && (
-        <p style={{ color: 'red', marginBottom: '10px' }}>{memberError}</p>
+        <p style={{ color: "red", marginBottom: "10px" }}>{memberError}</p>
       )}
       {error && !amountError && !memberError && (
-        <p style={{ color: 'red', marginBottom: '10px' }}>
+        <p style={{ color: "red", marginBottom: "10px" }}>
           Пожалуйста, введите свой ID и сумму
         </p>
       )}
 
-      <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+      <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
         <button
           style={{
-            backgroundColor: '#007bff',
-            color: '#fff',
-            padding: '10px 20px',
-            borderRadius: '5px',
-            border: 'none',
-            cursor: 'pointer',
-            fontSize: '16px',
+            backgroundColor: "#007bff",
+            color: "#fff",
+            padding: "10px 20px",
+            borderRadius: "5px",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "16px",
           }}
           onClick={handlePaymentClick}
         >
@@ -217,13 +220,13 @@ const Page = () => {
         </button>
         <button
           style={{
-            backgroundColor: '#007bff',
-            color: '#fff',
-            padding: '10px 20px',
-            borderRadius: '5px',
-            border: 'none',
-            cursor: 'pointer',
-            fontSize: '16px',
+            backgroundColor: "#007bff",
+            color: "#fff",
+            padding: "10px 20px",
+            borderRadius: "5px",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "16px",
           }}
           onClick={handlePayment}
         >
@@ -232,6 +235,4 @@ const Page = () => {
       </div>
     </div>
   );
-};
-
-export default Page;
+}

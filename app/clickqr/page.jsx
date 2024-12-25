@@ -4,7 +4,7 @@ import { QRCodeCanvas } from "qrcode.react";
 import "@/app/clickqr/style.css";
 import axios from "axios";
 
-const ClickQr = () => {
+export default function ClickQr() {
   const urlParams = new URLSearchParams(window.location.search);
   const userID = urlParams.get("memberId");
   const amount = urlParams.get("amount");
@@ -91,7 +91,6 @@ const ClickQr = () => {
   // };
 
   const topUpMember = async (memberId) => {
-    
     const payload = {
       topup_ids: String(memberId),
       topup_value: `${parseFloat(amount).toFixed(2)}`,
@@ -155,6 +154,4 @@ const ClickQr = () => {
       )}
     </div>
   );
-};
-
-export default ClickQr;
+}
